@@ -1,3 +1,9 @@
+{# BOOTSTRAP #}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+
+{# Custom google charts #}
 <script type="text/javascript">
     google.charts.load('current', {'packages': ['corechart', 'scatter']});
     google.charts.setOnLoadCallback(drawCharts);
@@ -5,4 +11,12 @@
     function drawCharts() {
         drawChart1();
     }
+</script>
+
+{# Menu toggle #}
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
 </script>

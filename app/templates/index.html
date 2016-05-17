@@ -1,48 +1,46 @@
 {% extends "base.html" %}
 {% block content %}
+    <div class="content">
+        {% if students %}
+            <div id="chart1_div"></div>
+            <script type="text/javascript">
+                function drawChart1() {
 
-    {% if students %}
-        <div id="chart1_div"></div>
-        <script type="text/javascript">
-            function drawChart1() {
-
-                var data = new google.visualization.arrayToDataTable([
-                    [
-                        'Grade',
-                        'Blackboard Time', {'type': 'string', 'role': 'style'},
-                        'Casper Time', {'type': 'string', 'role': 'style'}
-                    ],
-                    {% for student in students %}
-
+                    var data = new google.visualization.arrayToDataTable([
                         [
-                            {{ student.average_grade }},
-                            {{ student.blackboard_total_time_spent }},
-                            {% if student == this_student %}'point { size: 18 }',
-                                {% else %}null,
-                            {% endif %}
-                            {{ student.casper_total_time_spent }},
-                            {% if student == this_student %}'point { size: 18 }',
-                                {% else %}null,
-                            {% endif %}
+                            'Grade',
+                            'Blackboard Time', {'type': 'string', 'role': 'style'},
+                            'Casper Time', {'type': 'string', 'role': 'style'}
                         ],
-                    {% endfor %}
-                ]);
+                        {% for student in students %}
 
-                var options = {
-                    title: 'Academic activities vs Grades',
-                    hAxis: {title: 'Grade'},
-                    vAxis: {title: 'Time Spent'}
-                };
+                            [
+                                {{ student.average_grade }},
+                                {{ student.blackboard_total_time_spent }},
+                                {% if student == this_student %}'point { size: 18 }',
+                                    {% else %}null,
+                                {% endif %}
+                                {{ student.casper_total_time_spent }},
+                                {% if student == this_student %}'point { size: 18 }',
+                                    {% else %}null,
+                                {% endif %}
+                            ],
+                        {% endfor %}
+                    ]);
 
-                var chart = new google.visualization.ScatterChart(document.getElementById('chart1_div'));
+                    var options = {
+                        title: 'Academic activities vs Grades',
+                        hAxis: {title: 'Grade'},
+                        vAxis: {title: 'Time Spent'}
+                    };
 
-                chart.draw(data, options);
-            }
-        </script>
-    {% else %}
-        None
-    {% endif %}
+                    var chart = new google.visualization.ScatterChart(document.getElementById('chart1_div'));
 
-
-
+                    chart.draw(data, options);
+                }
+            </script>
+        {% else %}
+            None
+        {% endif %}
+    </div>
 {% endblock %}
